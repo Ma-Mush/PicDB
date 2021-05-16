@@ -17,6 +17,8 @@ USE ONLY STRING!
 Documentation
 Документация
 
+# import
+from PicDB import PicBD
 
 # _ = PicDB(filename)
 Connect to "db"
@@ -49,4 +51,36 @@ mass - массив с заголовками
 
 # ._edit_data(title_last, last_data, title_new, new_data)
 
-потом допишу короч
+name | what is it
+------------- | -------------
+title_last | ident title for search string / идентификация столбца для поиска строки
+last_data | data in string for replacement data in title_new / данные в строке для замены данных в title_new
+title_new | ident title for replacement data / идентификация столбца для замены
+new_data | new data in searched cell / новые данные в найденной ячейке
+
+# _.insert_data(mass)
+mass - ["data in title1", "data in title2", ...]
+
+mass - list with data
+
+mass - массив с данными
+
+# _.select_data(title, data)
+Return list with lists found items
+
+Возвращает массив с массивами найденных данных
+
+name | what is it
+------------- | -------------
+title | ident title for search string / идентификация столбца для поиска строки
+data | data for ident cell / данные в строке для поиска ячейки
+
+# _.delete_datat(itle, data)
+Delete data in cell
+
+Удаляет данные в ячейке
+
+name | what is it
+------------- | -------------
+title | ident title for search string / идентификация столбца для поиска строки
+data | data for ident cell / данные в строке для поиска ячейки
