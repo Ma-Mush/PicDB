@@ -20,25 +20,33 @@ Documentation
 
 # _ = PicDB(filename)
 Connect to "db"
+
 Подкючение к "БД"
 
 # _.read_db()
 Return what the program is working with
+
 Возвращает то, с чем работает программа
 
 # _.get_all_data()
 Return list with lists of data
+
 Возвращает массив с массивами данных
+
 [["data1", "data2"], [...], ...]
 
 # _.pretty_read()
 Return beautiful view of data :) 
+
 Возвращает красивый вид данных)
 
 # _.create_titles(mass)
 mass - ["title1", "title2", ...]
+
 mass - list with titles
+
 mass - массив с заголовками
 
 # ._edit_data(title_last, last_data, title_new, new_data)
+
 потом допишу короч
