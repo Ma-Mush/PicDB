@@ -59,11 +59,11 @@ title_new | ident title for replacement data / идентификация сто
 new_data | new data in searched cell / новые данные в найденной ячейке
 
 # _.insert_data(mass)
+Insert data 
+
 mass - ["data in title1", "data in title2", ...]
 
-mass - list with data
-
-mass - массив с данными
+mass - list with data / массив с данными
 
 # _.select_data(title, data)
 Return list with lists found items
