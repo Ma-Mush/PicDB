@@ -75,7 +75,7 @@ name | what is it
 title | ident title for search string / идентификация столбца для поиска строки
 data | data for ident cell / данные в строке для поиска ячейки
 
-# _.delete_datat(itle, data)
+# _.delete_datat(title, data)
 Delete data in cell
 
 Удаляет данные в ячейке
@@ -84,3 +84,24 @@ name | what is it
 ------------- | -------------
 title | ident title for search string / идентификация столбца для поиска строки
 data | data for ident cell / данные в строке для поиска ячейки
+
+
+# Examples / Примеры 
+```python
+from PicDB import PicBD
+sql = PicBD('test_PicBD.png') # Connect to our "db"
+sql.create(['id', 'hash']) # Create 2 titles - id and hash
+sql.insert_data(['3234235', '134234234']) # insert data 
+a = sql.select_data('234', 'id') # Selecrt string with id = 234
+print(a) # [['234', '234']]
+sql.edit_data('id', '234', 'hash', '1234') #
+a = sql.select_data('234', 'id') #
+print(a) #
+b = sql.search('id', '3234235') #
+print(b) #
+a = sql.get_all_data() #
+print(a) #
+```
+скоро допишу
+
+
