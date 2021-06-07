@@ -1,107 +1,136 @@
 # PicDB
+Библиотека для создания БД в виде картинки (файла в формате .png, .jpg и тд)
 
-Attention
-This project created in Telegeram-chat on phone and I'm not sure if the code is pretty :) 
-Perhaps there were already such projects, but I did not know about them and came up with this one myself.
-if you find bugs or fix my code, I will be happy :)
-USE ONLY STRING!
+!!!Используйте данные ТОЛЬКО в виде СТРОКИ (str)!!!
 
-Внимание
-Этот проект создавался в Телеграм-чате на телефоне и я не уверен, что код красивый)
-Возможно такие проекты уже были, но я не знал о них (и не знаю), этот придумал сам
-если вы найдете баги или исправите мой код, я буду рад) 
-ИСПОЛЬЗУЙТЕ ТОЛЬКО STRING!
+=+=+=+=+=+=
 
-+=+=+=+=+=+=+=+=++=+=+=+=+=+=+=+=++=+=+=+=+
+Надо отметить, что возможно такие проекты уже были, но я не знал о них (и не знаю), а так же сам код я писал на телефоне в поле ввода Телеграма, поэтому если вы найдете недочеты и исправите их, я буду очень рад :D
 
-Documentation
-Документация
+## Импорт и подключение к "базе данных"
+## 1 Вариант (рекомендую)
 
-# import
-from PicDB import PicBD
+Импорт - from PicDB import PicDB 
 
-# _ = PicDB(filename)
-Connect to "db"
+Подключение - _ = PicDB("filename.png")
 
-Подкючение к "БД"
+## 2 Вариант
 
-# _.read_db()
-Return what the program is working with
+Импорт - import PicDB 
 
-Возвращает то, с чем работает программа
+Подключение - _ = PicDB.PicDB("filename.png")
 
-# _.get_all_data()
-Return list with lists of data
+## _.read_db()
+Возвращет строку данных в БД, то, с чем работает программа
 
-Возвращает массив с массивами данных
-
-[["data1", "data2"], [...], ...]
-
-# _.pretty_read()
-Return beautiful view of data :) 
-
-Возвращает красивый вид данных)
-
-# _.create_titles(mass)
-mass - ["title1", "title2", ...]
-
-mass - list with titles
-
-mass - массив с заголовками
-
-# ._edit_data(title_last, last_data, title_new, new_data)
-
-name | what is it
-------------- | -------------
-title_last | ident title for search string / идентификация столбца для поиска строки
-last_data | data in string for replacement data in title_new / данные в строке для замены данных в title_new
-title_new | ident title for replacement data / идентификация столбца для замены
-new_data | new data in searched cell / новые данные в найденной ячейке
-
-# _.insert_data(mass)
-Insert data 
-
-mass - ["data in title1", "data in title2", ...]
-
-mass - list with data / массив с данными
-
-# _.select_data(title, data)
-Return list with lists found items
-
-Возвращает массив с массивами найденных данных
-
-name | what is it
-------------- | -------------
-title | ident title for search string / идентификация столбца для поиска строки
-data | data for ident cell / данные в строке для поиска ячейки
-
-# _.delete_datat(title, data)
-Delete data in cell
-
-Удаляет данные в ячейке
-
-name | what is it
-------------- | -------------
-title | ident title for search string / идентификация столбца для поиска строки
-data | data for ident cell / данные в строке для поиска ячейки
-
-
-# Examples / Примеры 
+пример
 ```python
-from PicDB import PicBD
-sql = PicBD('test_PicBD.png') # Connect to our "db"
-sql.create(['id', 'hash']) # Create 2 titles - id and hash
-sql.insert_data(['3234235', '134234234']) # insert data 
-a = sql.select_data('234', 'id') # Selecrt string with id = 234
-print(a) # [['234', '234']]
-sql.edit_data('id', '234', 'hash', '1234') #
-a = sql.select_data('234', 'id') #
-print(a) #
-b = sql.search('id', '3234235') #
-print(b) #
-a = sql.get_all_data() #
-print(a) #
+print(db.read_db()) # -> """tit1%tit%data1%new%
+                    #       tit2%tit%data2%new%"""
 ```
-скоро допишу
 
+## _.get_all_data()
+Возвращает массив с массивами данных в таблице
 
+пример 
+```python
+print(db.get_all_data()) # -> [[data1, data2]]
+```
+
+## _.pretty_read()
+Возвращает читабельный вариант данных в БД (может выводить неккоректно, лучше с ним не связыватся)
+
+пример 
+```python
+print(db.pretty_read()) # -> """|    tit1    |    tit2    |
+                        #       |   data1   |   data2   |       """
+```
+
+## _.create__titles(mass)
+Создает столбцы в БД
+
+!!!ВНИМАНИЕ!!!
+
+Данная функция полностью удаляет ВСЕ данные в БД и создате чистую со столбцами, указанными в переданном массиве
+
+пример
+```python
+db.create_titles(["tit1", "tit2"])
+# БД до - *пусто*
+
+# БД после - tit1 | tit2
+#            ==========
+```
+
+## _.insert_data(mass)
+Вставляет данные в БД по столбцам соответственно
+
+пример 
+```python
+db.insert_data(["data1", "data2"])
+# БД до - tit1 | tit2
+#          ==========
+
+# БД после - tit1 | tit2
+#            ==========
+#           data1 | data3
+```
+
+##  _.edit_data(title_last, last_data, title_new, new_data)
+Изменяет данные в таблице
+
+Параметры:
+параметр | что делает
+---------|------------
+title_last | поиск строки для изменения по столбцу (x-координата)
+last_data | данные в ячейке в строке для изменения в указанном выше столбце (y-координата)
+title_new | поиск ячейке по столбцу в найденной раннее строке
+new_data | новые данные в найденной ячейке
+
+пример
+```python 
+db.edit_data("tit1","data1","tit2","data3")
+# БД до - tit1 | tit2
+#          ==========
+#         data1 | data2
+
+# БД после - tit1 | tit2
+#            ==========
+#           data1 | data3
+
+```
+
+## _.select_data(title, data)
+Возвращает массив с массивами данных строк(-и), найденных по указанным аргументам
+
+Параметры:
+параметр | что делает
+---------|------------
+title | поиск строк(-и) (x-координата)
+last | данные в ячейке в строке(-ах) в указанном выше столбце (y-координата)
+
+пример
+```python
+print(db.select_data("tit1", "data1") # -> [["data1", "data2"]]
+```
+
+## db.delete_data(title, data)
+Удаляет строку(-и) данных в БД, найденных по указанным аргументам
+
+Параметры:
+параметр | что делает
+---------|------------
+title | поиск строк(-и) (x-координата)
+last | данные в ячейке в строке(-ах) в указанном выше столбце (y-координата)
+
+пример
+```python 
+db.edit_data("tit1","data1")
+# БД до - tit1 | tit2
+#          ==========
+#         data1 | data2
+
+# БД после - tit1 | tit2
+#            ==========
+
+```
