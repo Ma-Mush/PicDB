@@ -125,7 +125,7 @@ last | данные в ячейке в строке(-ах) в указанном
 
 пример
 ```python 
-db.edit_data("tit1","data1")
+db.delete_data("tit1","data1")
 # БД до - tit1 | tit2
 #          ==========
 #         data1 | data2
