@@ -114,7 +114,7 @@ last | данные в ячейке в строке(-ах) в указанном
 print(db.select_data("tit1", "data1") # -> [["data1", "data2"]]
 ```
 
-## db.delete_data(title, data)
+## _.delete_data(title, data)
 Удаляет строку(-и) данных в БД, найденных по указанным аргументам
 
 Параметры:
@@ -132,5 +132,39 @@ db.delete_data("tit1","data1")
 
 # БД после - tit1 | tit2
 #            ==========
+
+```
+
+## _.update_titles(new_titles)
+Изменяет столбцы. Если передано больше столбцов, чем есть сейчас - новые заполняются пустыми строками (''), если меньше - лишние удаляются вместе с данными
+
+пример
+```python 
+db.update_titles(["tit", "tit1"])
+# БД до - tit1 | tit2
+#          ==========
+#         data1 | data2
+
+# БД после - tit | tit1
+#            ==========
+#           data1 | data2
+
+db.update_titles(["tit", "tit1", "tit2"])
+# БД до -  tit | tit1 
+#          ==========
+#         data1 | data2
+
+# БД после - tit | tit1 | tit2
+#          ====================
+#         data1 | data2 | 
+
+db.update_titles(["tit"])
+# БД до -  tit | tit1 | tit2
+#          ====================
+#         data1 | data2 | 
+
+# БД после - tit 
+#          =======
+#           data1 
 
 ```
